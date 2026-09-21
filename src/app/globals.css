@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+/* ============================================================
+   NAIROBI UNDERGROUND — Design System Tokens (Tailwind v4)
+   The Republic of Nzigestan
+   ============================================================ */
+
+@theme {
+  /* --- Colors --- */
+  --color-obsidian:      #0a0a0a;
+  --color-surface:       #131313;
+  --color-surface-low:   #1c1b1b;
+  --color-surface-card:  #181818;
+  --color-surface-high:  #2a2a2a;
+  --color-surface-highest: #353534;
+  --color-border:        #242424;
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-bright: rgba(255, 255, 255, 0.15);
+
+  --color-red:           #E50914;
+  --color-crimson:       #FF0033;
+  --color-gold:          #E5A93C;
+  --color-amber:         #FFA500;
+  --color-muted:         #8A8A8A;
+
+  --color-on-surface:    #e5e2e1;
+  --color-on-muted:      #a3a3a3;
+
+  /* --- Fonts --- */
+  --font-headline: "Anton", Impact, sans-serif;
+  --font-sans:     "Space Grotesk", system-ui, sans-serif;
+  --font-mono:     "JetBrains Mono", "Courier Prime", monospace;
+
+  /* --- Spacing --- */
+  --spacing-gutter:        1.25rem;
+  --spacing-gutter-mobile: 0.75rem;
+  --spacing-margin:        2.5rem;
+  --spacing-margin-mobile: 1rem;
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+*, *::before, *::after {
+  border-radius: 0 !important; /* Brutalist — sharp corners always */
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #0a0a0a;
+}
+
+body {
+  background-color: #0e0e0e;
+  color: #e5e2e1;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+/* --- Selection --- */
+::selection {
+  background-color: #E50914;
+  color: #ffffff;
+}
+
+/* --- Scrollbar hiding --- */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ============================================================
+   NAIROBI UNDERGROUND UTILITY CLASSES
+   ============================================================ */
+
+/* Glow effects */
+.glow-red {
+  box-shadow: 0 0 25px -5px rgba(229, 9, 20, 0.45);
+}
+.glow-red-strong {
+  box-shadow: 0 0 20px rgba(255, 0, 51, 0.45);
+}
+.glow-gold {
+  box-shadow: 0 0 16px rgba(229, 169, 60, 0.30);
+}
+.text-glow-red {
+  text-shadow: 0 0 20px rgba(229, 9, 20, 0.7);
+}
+
+/* ON AIR pulse dot */
+.pulse-dot {
+  position: relative;
+  display: inline-flex;
+  width: 0.625rem;
+  height: 0.625rem;
+}
+.pulse-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: #E50914;
+  animation: ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  opacity: 0.75;
+}
+.pulse-dot::after {
+  content: "";
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #E50914;
+}
+
+@keyframes ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+/* Ticker crawl animation */
+@keyframes ticker-crawl {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(-100%); }
+}
+.ticker-animate {
+  animation: ticker-crawl 25s linear infinite;
+  white-space: nowrap;
+}
+
+/* Waveform scrub bar (red fill on dark track) */
+.scrub-bar {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 2px;
+  background: #242424;
+  outline: none;
+  cursor: pointer;
+}
+.scrub-bar::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 3px;
+  height: 14px;
+  background: #E50914;
+  cursor: pointer;
+}
+
+/* ============================================================
+   TYPOGRAPHY HELPERS
+   ============================================================ */
+
+.font-headline { font-family: "Anton", Impact, sans-serif; }
+.font-mono     { font-family: "JetBrains Mono", monospace; }
+.font-sans     { font-family: "Space Grotesk", system-ui, sans-serif; }
+
+/* ============================================================
+   COMPONENT BASE STYLES
+   ============================================================ */
+
+/* Primary button — Hot-Mic Red */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  background-color: #E50914;
+  color: #ffffff;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s, box-shadow 0.15s;
+}
+.btn-primary:hover {
+  background-color: #FF0033;
+  box-shadow: 0 0 16px rgba(255, 0, 51, 0.5);
+}
+
+/* Secondary button — Dark surface */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  background-color: #181818;
+  color: #e5e2e1;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid #333333;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+.btn-secondary:hover {
+  background-color: #ffffff;
+  color: #0a0a0a;
+}
+
+/* M-Pesa Gold button */
+.btn-mpesa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #E5A93C;
+  color: #0a0a0a;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s, box-shadow 0.15s;
+}
+.btn-mpesa:hover {
+  background-color: #FFA500;
+  box-shadow: 0 0 16px rgba(229, 169, 60, 0.4);
+}
+
+/* Terminal input (square, red focus ring) */
+.input-terminal {
+  width: 100%;
+  background-color: #121212;
+  color: #e5e2e1;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid #282828;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input-terminal:focus {
+  border-color: #E50914;
+}
+.input-terminal::placeholder {
+  color: #737373;
+}
+
+/* ON-AIR pill badge */
+.badge-on-air {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  background-color: #E50914;
+  color: #ffffff;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Surface card */
+.card {
+  background-color: #141414;
+  border: 1px solid #222222;
+}
+
+/* Inventory tag */
+.tag-stock {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.125rem 0.375rem;
+  background-color: rgba(0,0,0,0.7);
+  color: #e5e2e1;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Safe area support for mobile */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.pt-safe { padding-top: env(safe-area-inset-top, 0px); }
