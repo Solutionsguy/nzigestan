@@ -26,7 +26,6 @@ export function BroadcastProvider({ children }: { children: React.ReactNode }) {
   const [viewerCount, setViewerCount] = useState<number>(14280);
   const [nextStreamDate, setNextStreamDateState] = useState<string>("Friday 9:00 PM EAT");
   const [ingestionUrl, setIngestionUrlState] = useState<string>("https://www.youtube.com/watch?v=7tkGUXetubY");
-  const [useSSE, setUseSSE] = useState(false);
 
   // Fetch broadcast status from central server API (shared across all LAN devices)
   const syncWithServer = useCallback(async () => {
@@ -79,14 +78,11 @@ export function BroadcastProvider({ children }: { children: React.ReactNode }) {
       eventSource.onerror = () => {
         eventSource?.close();
         eventSource = null;
-        setUseSSE(false);
         // Fall back to polling
         reconnectTimer = setTimeout(connect, RECONNECT_DELAY);
       };
 
-      eventSource.onopen = () => {
-        setUseSSE(true);
-      };
+      eventSource.onopen = () => {};
     };
 
     connect();
