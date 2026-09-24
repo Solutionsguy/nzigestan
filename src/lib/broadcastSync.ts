@@ -5,43 +5,31 @@ import { getYouTubeLiveInfo } from "./youtube";
  * Periodically sync the broadcast state with the actual YouTube live broadcast.
  * Runs every 30 seconds. Adjust the interval as needed.
  */
+let syncOfflineStreak = 0;
+
 async function syncBroadcast() {
   try {
-    const liveInfo = await getYouTubeLiveInfo();
     const { broadcast } = await import("./serverStore").then(m => m.getServerStore());
+    const liveInfo = await getYouTubeLiveInfo(broadcast.youtubeVideoId);
     
-      if (liveInfo.isLive) {
-        const updates: Partial<typeof broadcast> = {};
-        if (!broadcast.isLive) updates.isLive = true;
-        if (liveInfo.streamTitle && liveInfo.streamTitle !== broadcast.streamTitle) {
-          updates.streamTitle = liveInfo.streamTitle;
-        }
-        if (liveInfo.youtubeVideoId && liveInfo.youtubeVideoId !== broadcast.youtubeVideoId) {
-          updates.youtubeVideoId = liveInfo.youtubeVideoId;
-        }
-        if (liveInfo.ingestionUrl && liveInfo.ingestionUrl !== broadcast.ingestionUrl) {
-          updates.ingestionUrl = liveInfo.ingestionUrl;
-        }
-        if (liveInfo.viewerCount && liveInfo.viewerCount !== broadcast.viewerCount) {
-          updates.viewerCount = liveInfo.viewerCount;
-        }
+    if (liveInfo.isLive) {
+      syncOfflineStreak = 0;
+      const updates: Partial<typeof broadcast> = {};
+      if (!broadcast.isLive) updates.isLive = true;
+      if (liveInfo.streamTitle && liveInfo.streamTitle !== broadcast.streamTitle) {
+        updates.streamTitle = liveInfo.streamTitle;
+      }
+      if (liveInfo.youtubeVideoId && liveInfo.youtubeVideoId !== broadcast.youtubeVideoId) {
+        updates.youtubeVideoId = liveInfo.youtubeVideoId;
+      }
+      if (liveInfo.ingestionUrl && liveInfo.ingestionUrl !== broadcast.ingestionUrl) {
+        updates.ingestionUrl = liveInfo.ingestionUrl;
+      }
+      if (liveInfo.viewerCount && liveInfo.viewerCount !== broadcast.viewerCount) {
+        updates.viewerCount = liveInfo.viewerCount;
+      }
 
-        if (Object.keys(updates).length > 0) {
-          await updateBroadcast(updates);
-          try {
-            const { getDb } = await import("./db");
-            const db = await getDb();
-            if (db) {
-              const { updateBroadcast: updateBroadcastDb } = await import("./dbService");
-              await updateBroadcastDb(updates);
-            }
-          } catch (e) {
-            console.warn("[BroadcastSync] DB sync error:", e);
-          }
-        }
-      } else if (!liveInfo.isLive && broadcast.isLive) {
-        // Stream has concluded on YouTube
-        const updates: Partial<typeof broadcast> = { isLive: false, viewerCount: 0 };
+      if (Object.keys(updates).length > 0) {
         await updateBroadcast(updates);
         try {
           const { getDb } = await import("./db");
@@ -54,6 +42,25 @@ async function syncBroadcast() {
           console.warn("[BroadcastSync] DB sync error:", e);
         }
       }
+    } else if (!liveInfo.isLive && broadcast.isLive) {
+      syncOfflineStreak += 1;
+      // Require 3 consecutive offline checks (e.g. 90s) before marking as concluded
+      if (syncOfflineStreak >= 3) {
+        const updates: Partial<typeof broadcast> = { isLive: false, viewerCount: 0 };
+        await updateBroadcast(updates);
+        try {
+          const { getDb } = await import("./db");
+          const db = await getDb();
+          if (db) {
+            const { updateBroadcast: updateBroadcastDb } = await import("./dbService");
+            await updateBroadcastDb(updates);
+          }
+        } catch (e) {
+          console.warn("[BroadcastSync] DB sync error:", e);
+        }
+        syncOfflineStreak = 0;
+      }
+    }
   } catch (err) {
     console.warn("[BroadcastSync] failed to sync broadcast:", err);
   }

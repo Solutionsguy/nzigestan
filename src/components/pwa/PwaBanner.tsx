@@ -1,10 +1,26 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
-import { Wifi, WifiOff } from "lucide-react";
+import { WifiOff, X, Download } from "lucide-react";
+import Image from "next/image";
 
 export default function PwaBanner() {
-  const { isInstalled, isOffline } = useServiceWorker();
+  const { isInstalled, isOffline, canInstall, triggerInstall } = useServiceWorker();
+  const [dismissed, setDismissed] = useState(true);
+
+  useEffect(() => {
+    // Check if previously dismissed or already installed
+    try {
+      const isDismissed = localStorage.getItem("pwa_dismissed") === "true";
+      const isAlreadyInstalled = localStorage.getItem("pwa_installed") === "true";
+      if (!isDismissed && !isAlreadyInstalled && !isInstalled) {
+        setDismissed(false);
+      }
+    } catch {
+      setDismissed(false);
+    }
+  }, [isInstalled]);
 
   if (isOffline) {
     return (
@@ -15,35 +31,66 @@ export default function PwaBanner() {
     );
   }
 
-  if (!isInstalled) {
-    return (
-      <div className="fixed bottom-20 left-0 right-0 z-40 md:hidden bg-[#141414] border-t border-[#222] px-4 py-3">
-        <div className="flex items-center justify-between max-w-sm mx-auto">
-          <div className="flex items-center gap-2">
-            <Wifi size={16} className="text-[#E5A93C]" />
-            <span className="font-mono text-[11px] text-[#aaa]">Install Nzigestan App</span>
+  // Hide completely once installed or dismissed
+  if (isInstalled || dismissed) {
+    return null;
+  }
+
+  const handleDismiss = () => {
+    setDismissed(true);
+    try {
+      localStorage.setItem("pwa_dismissed", "true");
+    } catch {}
+  };
+
+  const handleInstallClick = async () => {
+    if (canInstall) {
+      await triggerInstall();
+    } else {
+      // Guide iOS or other browsers
+      alert("To install Nzigestan:\n1. Tap the Share button in your browser\n2. Select 'Add to Home Screen'");
+    }
+  };
+
+  return (
+    <div className="fixed bottom-20 left-3 right-3 z-40 md:hidden bg-[#161616]/95 backdrop-blur-md border border-[#E5A93C]/40 rounded-lg p-3 shadow-2xl animate-in fade-in slide-in-from-bottom duration-300">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="relative w-9 h-9 rounded-md overflow-hidden bg-black shrink-0 border border-[#333]">
+            <Image
+              src="/icons/icon-96x96.png"
+              alt="Nzigestan App"
+              fill
+              className="object-cover"
+              sizes="36px"
+            />
           </div>
+          <div className="min-w-0">
+            <h4 className="font-headline text-xs uppercase text-white truncate font-bold tracking-wide">
+              Install Nzigestan App
+            </h4>
+            <p className="font-mono text-[10px] text-[#888] truncate">
+              Instant live alerts & offline playback
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-1.5 shrink-0">
           <button
-            onClick={() => {
-              const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-              meta?.setAttribute("content", "#E50914");
-              // Trigger install prompt
-              interface BeforeInstallPromptEvent {
-                prompt: () => void;
-              }
-              const installPrompt = (window as unknown as { __installPrompt?: BeforeInstallPromptEvent }).__installPrompt;
-              if (installPrompt) {
-                installPrompt.prompt();
-              }
-            }}
-            className="btn-primary text-xs px-3 py-1.5"
+            onClick={handleInstallClick}
+            className="btn-primary text-[11px] py-1.5 px-3 flex items-center gap-1 font-bold shadow-md"
           >
-            Install
+            <Download size={12} /> Install
+          </button>
+          <button
+            onClick={handleDismiss}
+            aria-label="Close install banner"
+            className="p-1.5 text-[#666] hover:text-white transition-colors"
+          >
+            <X size={16} />
           </button>
         </div>
       </div>
-    );
-  }
-
-  return null;
+    </div>
+  );
 }

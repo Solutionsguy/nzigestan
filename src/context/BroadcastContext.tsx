@@ -93,9 +93,9 @@ export function BroadcastProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Polling heartbeat (runs every 2.5s) to guarantee mobile browsers get live state updates immediately
+  // Polling heartbeat (runs every 10s as a fallback to SSE)
   useEffect(() => {
-    const interval = setInterval(syncWithServer, 2500);
+    const interval = setInterval(syncWithServer, 10000);
 
     const handleVisibilityOrFocus = () => {
       if (typeof document !== "undefined" && document.visibilityState === "visible") {

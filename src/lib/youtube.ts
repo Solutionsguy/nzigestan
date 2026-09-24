@@ -412,7 +412,7 @@ function formatISO8601Duration(iso: string): string {
  * Fetch live broadcast info for the configured YouTube channel.
  * Returns a simple object used by the broadcast sync module.
  */
-export async function getYouTubeLiveInfo(): Promise<{
+export async function getYouTubeLiveInfo(currentKnownVideoId?: string): Promise<{
   isLive: boolean;
   streamTitle?: string;
   ingestionUrl: string;
@@ -423,42 +423,82 @@ export async function getYouTubeLiveInfo(): Promise<{
     console.warn("[YouTube] Missing API_KEY or CHANNEL_ID – live info disabled");
     return { isLive: false, ingestionUrl: "", viewerCount: 0 };
   }
-  // Search for an active live broadcast on the channel
-  const liveSearchUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=id,snippet&eventType=live&type=video&maxResults=1`;
-  const searchRes = await fetch(liveSearchUrl, { cache: "no-store" });
-  if (!searchRes.ok) {
-    console.warn("[YouTube] Live search failed", await searchRes.text());
-    return { isLive: false, ingestionUrl: "", viewerCount: 0 };
-  }
-  const searchData = await searchRes.json();
-  const liveItem = searchData.items && searchData.items[0];
-  if (!liveItem) {
-    return { isLive: false, ingestionUrl: "", viewerCount: 0 };
-  }
-  const videoId = liveItem.id?.videoId;
-  if (!videoId) {
-    return { isLive: false, ingestionUrl: "", viewerCount: 0 };
+
+  // 1. If we already know a live video ID, check it directly first (only 1 quota unit, faster & 100% reliable)
+  if (currentKnownVideoId) {
+    try {
+      const detailsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${currentKnownVideoId}&part=snippet,statistics,liveStreamingDetails`;
+      const detailsRes = await fetch(detailsUrl, { cache: "no-store" });
+      if (detailsRes.ok) {
+        const details = await detailsRes.json();
+        const item = details.items && details.items[0];
+        if (item) {
+          const isStillLive =
+            item.snippet?.liveBroadcastContent === "live" ||
+            (item.liveStreamingDetails?.actualStartTime && !item.liveStreamingDetails?.actualEndTime);
+
+          if (isStillLive) {
+            const streamTitle = decodeXmlEntities(item.snippet?.title || "Live Studio Broadcast");
+            const concurrentViewers = item.liveStreamingDetails?.concurrentViewers;
+            const statsViews = item.statistics?.viewCount;
+            const viewerCount = parseInt(concurrentViewers || statsViews || "0", 10);
+
+            return {
+              isLive: true,
+              streamTitle,
+              youtubeVideoId: currentKnownVideoId,
+              ingestionUrl: `https://www.youtube.com/watch?v=${currentKnownVideoId}`,
+              viewerCount,
+            };
+          }
+        }
+      }
+    } catch (err) {
+      console.warn("[YouTube] Direct video status check failed:", err);
+    }
   }
 
-  const streamTitle = decodeXmlEntities(liveItem.snippet?.title || "Live Studio Broadcast");
+  // 2. Search for any active live broadcast on the channel
+  try {
+    const liveSearchUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=id,snippet&eventType=live&type=video&maxResults=1`;
+    const searchRes = await fetch(liveSearchUrl, { cache: "no-store" });
+    if (!searchRes.ok) {
+      console.warn("[YouTube] Live search failed", await searchRes.text());
+      return { isLive: false, ingestionUrl: "", viewerCount: 0 };
+    }
+    const searchData = await searchRes.json();
+    const liveItem = searchData.items && searchData.items[0];
+    if (!liveItem) {
+      return { isLive: false, ingestionUrl: "", viewerCount: 0 };
+    }
+    const videoId = liveItem.id?.videoId;
+    if (!videoId) {
+      return { isLive: false, ingestionUrl: "", viewerCount: 0 };
+    }
 
-  // Fetch statistics and live streaming details
-  const detailsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoId}&part=snippet,statistics,liveStreamingDetails`;
-  const detailsRes = await fetch(detailsUrl, { cache: "no-store" });
-  let viewerCount = 0;
-  if (detailsRes.ok) {
-    const details = await detailsRes.json();
-    const item = details.items && details.items[0];
-    const concurrentViewers = item?.liveStreamingDetails?.concurrentViewers;
-    const statsViews = item?.statistics?.viewCount;
-    viewerCount = parseInt(concurrentViewers || statsViews || "0", 10);
+    const streamTitle = decodeXmlEntities(liveItem.snippet?.title || "Live Studio Broadcast");
+
+    // Fetch statistics and live streaming details
+    const detailsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoId}&part=snippet,statistics,liveStreamingDetails`;
+    const detailsRes = await fetch(detailsUrl, { cache: "no-store" });
+    let viewerCount = 0;
+    if (detailsRes.ok) {
+      const details = await detailsRes.json();
+      const item = details.items && details.items[0];
+      const concurrentViewers = item?.liveStreamingDetails?.concurrentViewers;
+      const statsViews = item?.statistics?.viewCount;
+      viewerCount = parseInt(concurrentViewers || statsViews || "0", 10);
+    }
+
+    return {
+      isLive: true,
+      streamTitle,
+      youtubeVideoId: videoId,
+      ingestionUrl: `https://www.youtube.com/watch?v=${videoId}`,
+      viewerCount,
+    };
+  } catch (err) {
+    console.warn("[YouTube] Live search error:", err);
+    return { isLive: false, ingestionUrl: "", viewerCount: 0 };
   }
-
-  return {
-    isLive: true,
-    streamTitle,
-    youtubeVideoId: videoId,
-    ingestionUrl: `https://www.youtube.com/watch?v=${videoId}`,
-    viewerCount,
-  };
 }

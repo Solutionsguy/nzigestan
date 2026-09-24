@@ -53,10 +53,10 @@ export const metadata: Metadata = {
     locale: "en_KE",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "The Republic of Nzigestan",
-    description: "Tuko kwa barabara on this physical odyssey.",
+  icons: {
+    icon: "/icons/icon-192x192.png",
+    shortcut: "/icons/icon-192x192.png",
+    apple: "/apple-touch-icon.png",
   },
 };
 

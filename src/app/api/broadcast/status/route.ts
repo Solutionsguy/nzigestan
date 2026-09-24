@@ -5,6 +5,7 @@ import { getBroadcast, updateBroadcast as updateBroadcastDb } from "@/lib/dbServ
 import { getDb } from "@/lib/db";
 
 let lastSyncTime = 0;
+let offlineStreak = 0;
 const SYNC_THROTTLE_MS = 60_000; // Check YouTube at most once per 60s
 
 async function syncYouTubeInBackground() {
@@ -12,12 +13,13 @@ async function syncYouTubeInBackground() {
   if (now - lastSyncTime < SYNC_THROTTLE_MS) return;
   lastSyncTime = now;
   try {
-    const { getYouTubeLiveInfo } = await import("@/lib/youtube");
-    const liveInfo = await getYouTubeLiveInfo();
     const { broadcast } = getServerStore();
+    const { getYouTubeLiveInfo } = await import("@/lib/youtube");
+    const liveInfo = await getYouTubeLiveInfo(broadcast.youtubeVideoId);
     const updates: Partial<typeof broadcast> = {};
 
     if (liveInfo.isLive) {
+      offlineStreak = 0;
       if (!broadcast.isLive) updates.isLive = true;
       if (liveInfo.streamTitle && liveInfo.streamTitle !== broadcast.streamTitle) {
         updates.streamTitle = liveInfo.streamTitle;
@@ -32,8 +34,13 @@ async function syncYouTubeInBackground() {
         updates.viewerCount = liveInfo.viewerCount;
       }
     } else if (!liveInfo.isLive && broadcast.isLive) {
-      updates.isLive = false;
-      updates.viewerCount = 0;
+      offlineStreak += 1;
+      // Only transition to offline after 3 consecutive confirmed offline checks
+      if (offlineStreak >= 3) {
+        updates.isLive = false;
+        updates.viewerCount = 0;
+        offlineStreak = 0;
+      }
     }
 
     if (Object.keys(updates).length > 0) {
