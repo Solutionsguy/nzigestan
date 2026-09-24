@@ -5,7 +5,32 @@ import type { Episode } from "@/types";
 import { rateLimit, rateLimitResponse } from "@/lib/rateLimit";
 import { getDb } from "@/lib/db";
 
+let lastEpisodeSync = 0;
+const EPISODE_SYNC_INTERVAL = 5 * 60 * 1000; // Auto-check YouTube every 5 mins
+
+async function syncEpisodesInBackground() {
+  const now = Date.now();
+  if (now - lastEpisodeSync < EPISODE_SYNC_INTERVAL) return;
+  lastEpisodeSync = now;
+  try {
+    const { fetchLatestYouTubeEpisodes } = await import("@/lib/youtube");
+    const freshEpisodes = await fetchLatestYouTubeEpisodes(20, false);
+    if (freshEpisodes && freshEpisodes.length > 0) {
+      setEpisodes(freshEpisodes);
+      const db = await getDb();
+      if (db) {
+        await Promise.all(freshEpisodes.map((ep) => addEpisodeDb(ep)));
+      }
+    }
+  } catch (err) {
+    console.warn("[Episodes API] Background auto-sync failed:", err);
+  }
+}
+
 export async function GET() {
+  // Fire on-demand background sync (non-blocking)
+  syncEpisodesInBackground().catch(() => {});
+
   const db = await getDb();
 
   // Try database first
@@ -21,8 +46,7 @@ export async function GET() {
               ? e.publishedAt.toISOString().split("T")[0]
               : (e.publishedAt as unknown as string),
         }));
-        setEpisodes(episodesForStore as Episode[]);
-        return NextResponse.json(episodes, {
+        return NextResponse.json(episodesForStore, {
           headers: { "Cache-Control": "no-store, no-cache, must-revalidate" },
         });
       }

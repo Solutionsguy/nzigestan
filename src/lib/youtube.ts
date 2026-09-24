@@ -10,7 +10,7 @@ export const API_KEY = process.env.YOUTUBE_API_KEY;
 export const CHANNEL_ID = process.env.YOUTUBE_CHANNEL_ID;
 
 // Cache Configuration
-const CACHE_TTL_MS = 60 * 60 * 1000; // 1 Hour TTL
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 Minutes TTL
 const CACHE_DIR = path.join(process.cwd(), ".cache");
 const CACHE_FILE = path.join(CACHE_DIR, "youtube_episodes.json");
 

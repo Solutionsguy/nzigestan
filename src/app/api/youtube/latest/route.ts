@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { fetchLatestYouTubeEpisodes, getCachedEpisodes } from "@/lib/youtube";
 import { setEpisodes } from "@/lib/serverStore";
+import { addEpisode as addEpisodeDb } from "@/lib/dbService";
+import { getDb } from "@/lib/db";
 
 export async function GET(req: Request) {
   try {
@@ -12,9 +14,17 @@ export async function GET(req: Request) {
     const episodes = await fetchLatestYouTubeEpisodes(maxResults, forceRefresh);
     const cacheInfo = getCachedEpisodes();
 
-    // Optionally sync into server store so all other endpoints immediately see fresh data
+    // Sync into server store and database so all endpoints and pages immediately see fresh data
     if (syncStore && episodes.length > 0) {
       setEpisodes(episodes);
+      const db = await getDb();
+      if (db) {
+        try {
+          await Promise.all(episodes.map((ep) => addEpisodeDb(ep)));
+        } catch (dbErr) {
+          console.warn("[YouTube Ingestion] DB upsert failed:", dbErr);
+        }
+      }
     }
 
     return NextResponse.json({

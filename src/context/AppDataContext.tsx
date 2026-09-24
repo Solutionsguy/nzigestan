@@ -127,7 +127,7 @@ export function AppDataProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     refreshAll();
-    const interval = setInterval(refreshAll, 3000);
+    const interval = setInterval(refreshAll, 10000);
     return () => clearInterval(interval);
   }, [refreshAll]);
 

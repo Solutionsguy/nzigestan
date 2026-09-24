@@ -6,7 +6,6 @@ import Link from "next/link";
 import SiteHeader from "@/components/layout/SiteHeader";
 import MobileNav from "@/components/layout/MobileNav";
 import {
-  MERCH_PRODUCTS,
   SHIPPING_OPTIONS,
   NAIROBI_WARDS,
   PROMO_CODES,
@@ -14,6 +13,7 @@ import {
   ACCOUNT_MERCH,
 } from "@/lib/constants";
 import { useAppData } from "@/context/AppDataContext";
+import { useCart } from "@/context/CartContext";
 import {
   ArrowRight,
   ShieldCheck,
@@ -24,11 +24,7 @@ import {
 
 export default function CartCheckoutPage() {
   const { promoCodes, adjustStock } = useAppData();
-  // Preload initial item for demonstration
-  const [items, setItems] = useState([
-    { product: MERCH_PRODUCTS[0], size: "L", qty: 1 },
-    { product: MERCH_PRODUCTS[4], size: undefined, qty: 1 }, // Matatu Thermal Flask
-  ]);
+  const { cart: items, removeFromCart, clearCart, cartCount, cartTotal: subtotal } = useCart();
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -41,7 +37,6 @@ export default function CartCheckoutPage() {
   const [stkStatus, setStkStatus] = useState<"idle" | "sending" | "confirmed">("idle");
   const [confirmedOrderId, setConfirmedOrderId] = useState("");
 
-  const subtotal = items.reduce((acc, i) => acc + i.product.priceKes * i.qty, 0);
   const selectedShipping = SHIPPING_OPTIONS.find((s) => s.id === shippingMethod);
   const shippingFee = selectedShipping ? Math.max(0, selectedShipping.priceKes) : 0;
   const discountAmount = Math.round((subtotal * discountPercent) / 100);
@@ -148,7 +143,8 @@ export default function CartCheckoutPage() {
       // 3. Decrement stock for each purchased item
       items.forEach((item) => adjustStock(item.product.id, -item.qty));
 
-      // 4. Confirm
+      // 4. Clear cart and confirm
+      clearCart();
       setConfirmedOrderId(orderId);
       setStkStatus("confirmed");
     } catch (err) {
@@ -158,13 +154,9 @@ export default function CartCheckoutPage() {
     }
   };
 
-  const removeItem = (idx: number) => {
-    setItems((prev) => prev.filter((_, i) => i !== idx));
-  };
-
   return (
     <div className="min-h-screen bg-[#0e0e0e] text-[#e5e2e1]">
-      <SiteHeader cartCount={items.length} />
+      <SiteHeader cartCount={cartCount} />
 
       <div className="bg-[#0a0a0a] border-b border-[#222] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -227,8 +219,8 @@ export default function CartCheckoutPage() {
                     Cart is empty.
                   </div>
                 ) : (
-                  items.map((item, idx) => (
-                    <div key={idx} className="p-4 flex gap-4 items-center">
+                  items.map((item) => (
+                    <div key={`${item.product.id}-${item.size ?? "nosize"}`} className="p-4 flex gap-4 items-center">
                       <div className="relative w-14 h-14 bg-[#0a0a0a] border border-[#222] shrink-0">
                         <Image
                           src={item.product.image}
@@ -251,7 +243,7 @@ export default function CartCheckoutPage() {
                         </span>
                       </div>
                       <button
-                        onClick={() => removeItem(idx)}
+                        onClick={() => removeFromCart(item.product.id, item.size)}
                         className="text-[#555] hover:text-[#E50914] p-1"
                       >
                         <Trash2 size={15} />

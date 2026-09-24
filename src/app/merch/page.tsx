@@ -6,6 +6,7 @@ import Image from "next/image";
 import SiteHeader from "@/components/layout/SiteHeader";
 import MobileNav from "@/components/layout/MobileNav";
 import { useAppData } from "@/context/AppDataContext";
+import { useCart } from "@/context/CartContext";
 import type { MerchProduct } from "@/types";
 import { ShoppingBag, ArrowRight, X, Plus, Minus } from "lucide-react";
 
@@ -19,8 +20,8 @@ const CATEGORIES = [
 
 export default function MerchPage() {
   const { merch } = useAppData();
+  const { cart, addToCart: ctxAddToCart, updateQty, cartCount, cartTotal } = useCart();
   const [activeCategory, setActiveCategory] = useState("all");
-  const [cart, setCart] = useState<{ product: MerchProduct; size?: string; qty: number }[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
   const [galleryIndex, setGalleryIndex] = useState<Record<string, number>>({});
@@ -29,26 +30,10 @@ export default function MerchPage() {
     ? merch
     : merch.filter((p) => p.category === activeCategory);
 
-  const cartCount = cart.reduce((a, b) => a + b.qty, 0);
-  const cartTotal = cart.reduce((a, b) => a + b.product.priceKes * b.qty, 0);
-
   const addToCart = (product: MerchProduct) => {
     const size = selectedSizes[product.id];
-    setCart((prev) => {
-      const existing = prev.find((i) => i.product.id === product.id && i.size === size);
-      if (existing) return prev.map((i) => i.product.id === product.id && i.size === size ? { ...i, qty: i.qty + 1 } : i);
-      return [...prev, { product, size, qty: 1 }];
-    });
+    ctxAddToCart(product, size, 1);
     setCartOpen(true);
-  };
-
-  const updateQty = (productId: string, size: string | undefined, delta: number) => {
-    setCart((prev) =>
-      prev.map((i) => i.product.id === productId && i.size === size
-        ? { ...i, qty: Math.max(0, i.qty + delta) }
-        : i
-      ).filter((i) => i.qty > 0)
-    );
   };
 
   return (
