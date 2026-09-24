@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Anton, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Anton, Space_Grotesk } from "next/font/google";
+import AppProviders from "@/components/providers/AppProviders";
 import "./globals.css";
 
 const anton = Anton({
@@ -12,12 +13,6 @@ const anton = Anton({
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -35,6 +30,21 @@ export const metadata: Metadata = {
     "Nairobi Comedy",
     "Kenyan Podcast",
   ],
+  manifest: "/manifest.json",
+  themeColor: "#0e0e0e",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Nzigestan",
+  },
+  formatDetection: {
+    telephone: false,
+  },
   openGraph: {
     title: "The Republic of Nzigestan | The Kisiangani Podcast",
     description: "Tuko kwa barabara on this physical odyssey.",
@@ -48,6 +58,9 @@ export const metadata: Metadata = {
     title: "The Republic of Nzigestan",
     description: "Tuko kwa barabara on this physical odyssey.",
   },
+};
+
+export const viewport = {
   themeColor: "#0e0e0e",
 };
 
@@ -57,11 +70,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
+      <html
       lang="en"
-      className={`${anton.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${anton.variable} ${spaceGrotesk.variable}`}
     >
-      <body>{children}</body>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0e0e0e" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Nzigestan" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="icon" href="/assets/branding/locust-emblem-hq-transparent.png" type="image/png" />
+      </head>
+      <body>
+        <AppProviders>{children}</AppProviders>
+      </body>
     </html>
   );
 }

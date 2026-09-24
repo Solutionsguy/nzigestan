@@ -1,0 +1,694 @@
+{
+  "broadcast": {
+    "isLive": true,
+    "streamTitle": "Mkurugenzi - Abel Mutua In The Building",
+    "viewerCount": 1230,
+    "nextStreamDate": "Friday 9:00 PM EAT",
+    "ingestionUrl": "https://www.youtube.com/watch?v=xkGw1YabOLs",
+    "youtubeVideoId": "xkGw1YabOLs",
+    "updatedAt": "2026-09-24T12:35:22.432Z"
+  },
+  "episodes": [
+    {
+      "id": "TW48mTykUHM",
+      "youtubeId": "TW48mTykUHM",
+      "title": "Two Thirds Gender Rule",
+      "thumbnail": "https://i.ytimg.com/vi/TW48mTykUHM/maxresdefault.jpg",
+      "duration": "2:46:36",
+      "viewCount": 10298,
+      "publishedAt": "2026-09-23T14:14:48Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "2iqtK26tbiQ",
+      "youtubeId": "2iqtK26tbiQ",
+      "title": "Baba Goldy - Wololo TV",
+      "thumbnail": "https://i.ytimg.com/vi/2iqtK26tbiQ/maxresdefault.jpg",
+      "duration": "2:04:38",
+      "viewCount": 11341,
+      "publishedAt": "2026-09-22T15:58:52Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "2tIAYKzrHCQ",
+      "youtubeId": "2tIAYKzrHCQ",
+      "title": "Getting A Phone",
+      "thumbnail": "https://i.ytimg.com/vi/2tIAYKzrHCQ/maxresdefault.jpg",
+      "duration": "20:24",
+      "viewCount": 4497,
+      "publishedAt": "2026-09-22T12:34:38Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "7tkGUXetubY",
+      "youtubeId": "7tkGUXetubY",
+      "title": "AMAN on a Mission - Kitengela Only",
+      "thumbnail": "https://i.ytimg.com/vi/7tkGUXetubY/maxresdefault.jpg",
+      "duration": "1:20:58",
+      "viewCount": 10251,
+      "publishedAt": "2026-09-21T15:12:28Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "0Us5a6SBhC4",
+      "youtubeId": "0Us5a6SBhC4",
+      "title": "'He Stole Our Money´- BTS at EastMeetsWest",
+      "thumbnail": "https://i.ytimg.com/vi/0Us5a6SBhC4/maxresdefault.jpg",
+      "duration": "07:47",
+      "viewCount": 3683,
+      "publishedAt": "2026-09-21T08:15:07Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "JQ4e3Nd59YA",
+      "youtubeId": "JQ4e3Nd59YA",
+      "title": "Sunkissed In Kitengela",
+      "thumbnail": "https://i.ytimg.com/vi/JQ4e3Nd59YA/maxresdefault.jpg",
+      "duration": "53:19",
+      "viewCount": 9617,
+      "publishedAt": "2026-09-21T08:08:13Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "YzyuEPUBC0M",
+      "youtubeId": "YzyuEPUBC0M",
+      "title": "Bobby ^East Meets West^ VS Tonio Kibs? - The Regular Mishap",
+      "thumbnail": "https://i.ytimg.com/vi/YzyuEPUBC0M/maxresdefault.jpg",
+      "duration": "10:51",
+      "viewCount": 908,
+      "publishedAt": "2026-09-21T07:12:13Z",
+      "frequency": "comic-diaries",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "-dsFDS1jJtM",
+      "youtubeId": "-dsFDS1jJtM",
+      "title": "Imo and the Ethnics",
+      "thumbnail": "https://i.ytimg.com/vi/-dsFDS1jJtM/maxresdefault.jpg",
+      "duration": "59:15",
+      "viewCount": 5166,
+      "publishedAt": "2026-09-20T16:40:27Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "H89igvdTVmw",
+      "youtubeId": "H89igvdTVmw",
+      "title": "Ty & The Boyz In Kitengela",
+      "thumbnail": "https://i.ytimg.com/vi/H89igvdTVmw/maxresdefault.jpg",
+      "duration": "1:17:39",
+      "viewCount": 8357,
+      "publishedAt": "2026-09-20T11:01:02Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "P8KIV-Y5zWk",
+      "youtubeId": "P8KIV-Y5zWk",
+      "title": "Unplugged With Jacob Aliet",
+      "thumbnail": "https://i.ytimg.com/vi/P8KIV-Y5zWk/maxresdefault.jpg",
+      "duration": "2:12:35",
+      "viewCount": 21537,
+      "publishedAt": "2026-09-18T13:42:59Z",
+      "frequency": "deep-dives",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "efMji-dyVTM",
+      "youtubeId": "efMji-dyVTM",
+      "title": "They Met On Instagram And Fell In Love - Kijana Ya Njugi",
+      "thumbnail": "https://i.ytimg.com/vi/efMji-dyVTM/maxresdefault.jpg",
+      "duration": "12:21",
+      "viewCount": 3186,
+      "publishedAt": "2026-08-28T11:59:16Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "rS0rE5wST6E",
+      "youtubeId": "rS0rE5wST6E",
+      "title": "The Mwakideu Dilemma and Other Stories",
+      "thumbnail": "https://i.ytimg.com/vi/rS0rE5wST6E/maxresdefault.jpg",
+      "duration": "14:56",
+      "viewCount": 2350,
+      "publishedAt": "2026-08-23T21:04:23Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "_UC8rSt9Z9E",
+      "youtubeId": "_UC8rSt9Z9E",
+      "title": "Blissful Banter Extra [RON 12 Hour Livestream Episode 7]",
+      "thumbnail": "https://i.ytimg.com/vi/_UC8rSt9Z9E/maxresdefault.jpg",
+      "duration": "1:39:30",
+      "viewCount": 6285,
+      "publishedAt": "2026-04-14T13:14:47Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "ke91pNp5cbY",
+      "youtubeId": "ke91pNp5cbY",
+      "title": "Aremis II  [Episode 273]",
+      "thumbnail": "https://i.ytimg.com/vi/ke91pNp5cbY/maxresdefault.jpg",
+      "duration": "51:15",
+      "viewCount": 8531,
+      "publishedAt": "2026-04-08T08:30:06Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    },
+    {
+      "id": "_nw0ZuQr3aY",
+      "youtubeId": "_nw0ZuQr3aY",
+      "title": "Tortoise Love [Two Thirds Gender Rule] LIVESTREAM",
+      "thumbnail": "https://i.ytimg.com/vi/_nw0ZuQr3aY/maxresdefault.jpg",
+      "duration": "1:35:47",
+      "viewCount": 7651,
+      "publishedAt": "2026-04-03T08:24:36Z",
+      "frequency": "blissful-banter",
+      "tags": [
+        "#TukoKwaBarabara",
+        "#ItawesaSana"
+      ]
+    }
+  ],
+  "merch": [
+    {
+      "id": "nzige-hoodie-black",
+      "name": "'NZIGE' Drop-Shoulder Hoodie — Black",
+      "tagline": "450 GSM heavyweight fleece — the official swarm uniform",
+      "priceKes": 4500,
+      "category": "streetwear",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "stockTotal": 100,
+      "stockRemaining": 18,
+      "image": "/assets/merch/hoodie-black-male.jpeg",
+      "gallery": [
+        "/assets/merch/hoodie-black-male.jpeg",
+        "/assets/merch/hoodies-collection.png"
+      ]
+    },
+    {
+      "id": "nzige-hoodie-burgundy",
+      "name": "'NZIGE' Drop-Shoulder Hoodie — Burgundy",
+      "tagline": "450 GSM heavyweight fleece — locust insignia, deep wine colorway",
+      "priceKes": 4500,
+      "category": "streetwear",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "stockTotal": 80,
+      "stockRemaining": 32,
+      "image": "/assets/merch/hoodie-burgundy-female.jpeg",
+      "gallery": [
+        "/assets/merch/hoodie-burgundy-female.jpeg",
+        "/assets/merch/hoodie-burgundy-male.jpeg",
+        "/assets/merch/hoodies-collection.png"
+      ]
+    },
+    {
+      "id": "nzige-hoodie-grey",
+      "name": "'NZIGE' Drop-Shoulder Hoodie — Heather Grey",
+      "tagline": "450 GSM heavyweight fleece — subtle swarm crest, everyday fit",
+      "priceKes": 4500,
+      "category": "streetwear",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "stockTotal": 80,
+      "stockRemaining": 45,
+      "image": "/assets/merch/hoodie-grey-male.jpeg",
+      "gallery": [
+        "/assets/merch/hoodie-grey-male.jpeg",
+        "/assets/merch/hoodie-charcoal-male.jpeg",
+        "/assets/merch/hoodies-collection.png"
+      ]
+    },
+    {
+      "id": "nzige-hoodie-jungle-green",
+      "name": "'NZIGE' Drop-Shoulder Hoodie — Jungle Green",
+      "tagline": "450 GSM heavyweight fleece — military-grade swarm colorway",
+      "priceKes": 4500,
+      "category": "streetwear",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "stockTotal": 80,
+      "stockRemaining": 56,
+      "image": "/assets/merch/hoodie-jungle-green-male.jpeg",
+      "gallery": [
+        "/assets/merch/hoodie-jungle-green-male.jpeg",
+        "/assets/merch/hoodie-forest-green-female.jpeg",
+        "/assets/merch/hoodies-collection.png"
+      ]
+    },
+    {
+      "id": "kisiangani-tee",
+      "name": "Kisiangani Podcast Locust Tee — White",
+      "tagline": "Premium 240 GSM cotton — two nzige, two mics, one republic",
+      "priceKes": 2800,
+      "category": "streetwear",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "stockTotal": 150,
+      "stockRemaining": 64,
+      "image": "/assets/merch/tshirt-white.png",
+      "gallery": [
+        "/assets/merch/tshirt-white.png",
+        "/assets/merch/tshirt-man-model.png",
+        "/assets/merch/tshirt-lady-model.png"
+      ]
+    },
+    {
+      "id": "kisiangani-tee-green",
+      "name": "Kisiangani Podcast Tee — Forest Green",
+      "tagline": "Pigment-dyed 240 GSM — the crest on deep green",
+      "priceKes": 2800,
+      "category": "streetwear",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "stockTotal": 100,
+      "stockRemaining": 72,
+      "image": "/assets/merch/tshirt-green.png"
+    },
+    {
+      "id": "nzigestan-sweatshirt",
+      "name": "Nzigestan Crewneck Sweatshirt — White",
+      "tagline": "380 GSM brushed fleece — clean crest, cozy everywhere",
+      "priceKes": 3800,
+      "category": "streetwear",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "stockTotal": 60,
+      "stockRemaining": 38,
+      "image": "/assets/merch/sweatshirt-white.png"
+    },
+    {
+      "id": "nzige-cap-black",
+      "name": "Nzigestan Snapback Cap — Black",
+      "tagline": "Embroidered locust insignia — dark ops edition",
+      "priceKes": 1800,
+      "category": "accessories",
+      "stockTotal": 80,
+      "stockRemaining": 41,
+      "image": "/assets/merch/cap-black.jpeg",
+      "gallery": [
+        "/assets/merch/cap-black.jpeg",
+        "/assets/merch/cap-black-male.jpeg"
+      ]
+    },
+    {
+      "id": "nzige-cap-white",
+      "name": "Nzigestan Dad Hat — White",
+      "tagline": "Embroidered locust crest — clean republic edition",
+      "priceKes": 1800,
+      "category": "accessories",
+      "stockTotal": 80,
+      "stockRemaining": 53,
+      "image": "/assets/merch/cap-white.jpeg",
+      "gallery": [
+        "/assets/merch/cap-white.jpeg",
+        "/assets/merch/cap-white-nzige.jpeg"
+      ]
+    },
+    {
+      "id": "nzige-tote-bag",
+      "name": "Nzigestan Canvas Tote Bag — Black",
+      "tagline": "Heavy-duty 12oz canvas — carry the republic everywhere",
+      "priceKes": 1500,
+      "category": "accessories",
+      "stockTotal": 100,
+      "stockRemaining": 67,
+      "image": "/assets/merch/tote-bag-black.jpeg"
+    },
+    {
+      "id": "enamel-pins",
+      "name": "Studio Crew Enamel Pin Set",
+      "tagline": "4 custom pins on collector card — swarm insignia",
+      "priceKes": 950,
+      "category": "accessories",
+      "stockTotal": 200,
+      "stockRemaining": 112,
+      "image": "/assets/branding/locust-emblem-transparent.png"
+    },
+    {
+      "id": "thermal-flask",
+      "name": "'Fuel for the Swarm' Matatu Thermal Flask 500ml",
+      "tagline": "Matte black laser-engraved — hydration on the odyssey",
+      "priceKes": 2200,
+      "category": "essentials",
+      "stockTotal": 80,
+      "stockRemaining": 9,
+      "image": "/assets/branding/brand-asset-2.png"
+    },
+    {
+      "id": "notebook",
+      "name": "Karura Deep Reflections Notebook",
+      "tagline": "A5 debossed foil cover — document the discourse",
+      "priceKes": 650,
+      "category": "essentials",
+      "stockTotal": 150,
+      "stockRemaining": 73,
+      "image": "/assets/branding/brand-asset-3.png"
+    },
+    {
+      "id": "coasters",
+      "name": "Stone & Walnut Coaster Set",
+      "tagline": "Set of two — for the late-night studio sessions",
+      "priceKes": 1200,
+      "category": "essentials",
+      "stockTotal": 60,
+      "stockRemaining": 34,
+      "image": "/assets/branding/brand-asset-4.png"
+    },
+    {
+      "id": "sticker-pack",
+      "name": "Fan Sticker Pack",
+      "tagline": "\"CHEKI\" · \"You Guy\" · \"Kuingia Mtaro\" · \"Itawesa Sana\"",
+      "priceKes": 400,
+      "category": "stickers",
+      "stockTotal": 500,
+      "stockRemaining": 287,
+      "image": "/assets/branding/wordmark-color-transparent.png"
+    }
+  ],
+  "events": [
+    {
+      "id": "ngong-hills-ridge-trek",
+      "category": "swarm-nature-hike",
+      "title": "Swarm Ridge Expedition",
+      "subtitle": "Ngong Hills 7 Knuckles Ridge Trek",
+      "venue": "Ngong Hills, Kajiado County",
+      "venueCoords": {
+        "lat": -1.3667,
+        "lng": 36.6333
+      },
+      "date": "2026-10-18",
+      "time": "06:00 EAT",
+      "capacityTotal": 100,
+      "capacityBooked": 82,
+      "coverImage": "/assets/studio/homepage-hero.png",
+      "ticketTiers": [
+        {
+          "id": "regular",
+          "name": "Regular Citizen Pass",
+          "description": "Includes transport from Kencom, guided hike, & bonfire debrief",
+          "priceKes": 2500
+        },
+        {
+          "id": "vip",
+          "name": "Swarm VIP",
+          "description": "Front group + branded Matatu Flask + priority boarding",
+          "priceKes": 4000
+        },
+        {
+          "id": "backstage",
+          "name": "Community Backstage Hangout",
+          "description": "Post-hike drinks & private podcast recording session with the crew",
+          "priceKes": 7500
+        }
+      ],
+      "status": "on-sale"
+    },
+    {
+      "id": "karura-philosophy-walk",
+      "category": "swarm-nature-hike",
+      "title": "Karura Forest Philosophy Walk",
+      "subtitle": "Tuko kwa Barabara Hike #02",
+      "venue": "Karura Forest, Nairobi",
+      "venueCoords": {
+        "lat": -1.2307,
+        "lng": 36.8308
+      },
+      "date": "2026-11-08",
+      "time": "07:30 EAT",
+      "capacityTotal": 80,
+      "capacityBooked": 31,
+      "coverImage": "/assets/studio/homepage-hero.png",
+      "ticketTiers": [
+        {
+          "id": "regular",
+          "name": "Regular Citizen Pass",
+          "description": "Guided forest walk & post-hike podcast debrief",
+          "priceKes": 1800
+        },
+        {
+          "id": "vip",
+          "name": "Swarm VIP",
+          "description": "All above + branded flask + crew group photo",
+          "priceKes": 3200
+        }
+      ],
+      "status": "on-sale"
+    },
+    {
+      "id": "braeburn-studio-a-sessions",
+      "category": "studio-live-taping",
+      "title": "Studio A Sessions — Live Taping",
+      "subtitle": "Exclusive 45-seat intimate live recording at Braeburn",
+      "venue": "Braeburn Theatre, Nairobi",
+      "date": "2026-10-31",
+      "time": "19:30 EAT",
+      "capacityTotal": 45,
+      "capacityBooked": 45,
+      "coverImage": "/assets/studio/studio-pod.png",
+      "ticketTiers": [
+        {
+          "id": "regular",
+          "name": "Citizen Pass",
+          "description": "Live Q&A & behind-the-scenes mic checks",
+          "priceKes": 3500
+        },
+        {
+          "id": "vip",
+          "name": "VIP Front Row",
+          "description": "Front row + post-show drinks with the crew",
+          "priceKes": 6000
+        }
+      ],
+      "status": "sold-out"
+    },
+    {
+      "id": "kuingia-mtaro-live",
+      "category": "comedy-showcase",
+      "title": "\"Kuingia Mtaro Live\"",
+      "subtitle": "Laf Lyf Comedy Showcase — Full House Standup Special",
+      "venue": "Braeburn Theatre, Nairobi",
+      "date": "2026-12-06",
+      "time": "20:00 EAT",
+      "capacityTotal": 300,
+      "capacityBooked": 187,
+      "coverImage": "/assets/studio/studio-pod.png",
+      "ticketTiers": [
+        {
+          "id": "regular",
+          "name": "Regular Citizen Pass",
+          "description": "General admission",
+          "priceKes": 2000
+        },
+        {
+          "id": "vip",
+          "name": "VIP Front Row",
+          "description": "Front row + meet & greet",
+          "priceKes": 4500
+        },
+        {
+          "id": "backstage",
+          "name": "Backstage Hangout",
+          "description": "Backstage access + all-night crew banter",
+          "priceKes": 8000
+        }
+      ],
+      "status": "on-sale"
+    }
+  ],
+  "tickerTerms": [
+    "#TukoKwaBarabara",
+    "#ItawesaSana",
+    "#YouGuy",
+    "#KuingiaMtaro",
+    "#Cheki",
+    "#HiiNiLafLyf",
+    "#RepublicOfNzigestan",
+    "#LafLyfLive",
+    "#NairobiUnderground"
+  ],
+  "promoCodes": {
+    "ITAWESASANA": {
+      "type": "percent",
+      "value": 10
+    },
+    "KUINGIAMTARO": {
+      "type": "gift",
+      "value": "sticker-pack"
+    }
+  },
+  "orders": [
+    {
+      "id": "NZG-8401",
+      "customerName": "Brian Otieno",
+      "phone": "+254 712 345 678",
+      "ward": "Kilimani",
+      "items": "'NZIGE' Hoodie (XL) x 1",
+      "totalKes": 4800,
+      "status": "paid",
+      "createdAt": "10 mins ago"
+    },
+    {
+      "id": "NZG-8400",
+      "customerName": "Faith Wanjiku",
+      "phone": "+254 722 890 123",
+      "ward": "Westlands",
+      "items": "Tuko kwa Barabara Tee (M) x 2",
+      "totalKes": 5900,
+      "status": "dispatched",
+      "createdAt": "1 hr ago"
+    },
+    {
+      "id": "NZG-8399",
+      "customerName": "Dennis Kiprop",
+      "phone": "+254 701 456 789",
+      "ward": "Eldoret Hub",
+      "items": "Dad Hat (1) + Matatu Flask (1)",
+      "totalKes": 4500,
+      "status": "paid",
+      "createdAt": "3 hrs ago"
+    },
+    {
+      "id": "NZG-8398",
+      "customerName": "Sharon Mutua",
+      "phone": "+254 733 678 901",
+      "ward": "Nairobi CBD",
+      "items": "Karura Notebook (2) + Sticker Pack (3)",
+      "totalKes": 2500,
+      "status": "delivered",
+      "createdAt": "Yesterday"
+    }
+  ],
+  "donors": [
+    {
+      "id": "1",
+      "name": "Dr. Omondi (London)",
+      "amountKes": 15000,
+      "tier": "Gold Locust Oligarch",
+      "shoutoutPinned": true,
+      "date": "2026-09-21"
+    },
+    {
+      "id": "2",
+      "name": "Wanjiku N. (Seattle)",
+      "amountKes": 10000,
+      "tier": "Swarm Pioneer",
+      "shoutoutPinned": false,
+      "date": "2026-09-20"
+    },
+    {
+      "id": "3",
+      "name": "Kevo M. (Kilimani)",
+      "amountKes": 5000,
+      "tier": "Swarm Citizen",
+      "shoutoutPinned": false,
+      "date": "2026-09-20"
+    },
+    {
+      "id": "4",
+      "name": "Captain Joe (Mombasa)",
+      "amountKes": 4000,
+      "tier": "Laf Lyf Crew",
+      "shoutoutPinned": false,
+      "date": "2026-09-19"
+    }
+  ],
+  "config": {
+    "paybill": "522522",
+    "accountLive": "NZIGE-LIVE",
+    "accountMerch": "ORDER-NZG",
+    "accountEvents": "EVENTS-NZG",
+    "youtubeChannel": "https://www.youtube.com/@thekisianganipodcast/",
+    "stationTitle": "THE REPUBLIC OF NZIGESTAN",
+    "stationMotto": "Tuko kwa barabara on this physical odyssey.",
+    "heroImageMode": "latest-episode",
+    "heroCustomImage": "/assets/studio/homepage-hero.png"
+  }
+}
