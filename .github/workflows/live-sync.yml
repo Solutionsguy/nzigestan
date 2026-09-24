@@ -1,0 +1,17 @@
+name: Sync YouTube Live Broadcast
+
+on:
+  schedule:
+    # Run every 5 minutes (free on GitHub Actions)
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Broadcast Sync Endpoint
+        run: |
+          if [ -n "${{ secrets.DEPLOYED_URL }}" ]; then
+            curl -s -f "${{ secrets.DEPLOYED_URL }}/api/broadcast/sync" || echo "Sync ping failed"
+          fi

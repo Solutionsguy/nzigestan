@@ -4,7 +4,58 @@ import { rateLimit, rateLimitResponse } from "@/lib/rateLimit";
 import { getBroadcast, updateBroadcast as updateBroadcastDb } from "@/lib/dbService";
 import { getDb } from "@/lib/db";
 
+let lastSyncTime = 0;
+const SYNC_THROTTLE_MS = 60_000; // Check YouTube at most once per 60s
+
+async function syncYouTubeInBackground() {
+  const now = Date.now();
+  if (now - lastSyncTime < SYNC_THROTTLE_MS) return;
+  lastSyncTime = now;
+  try {
+    const { getYouTubeLiveInfo } = await import("@/lib/youtube");
+    const liveInfo = await getYouTubeLiveInfo();
+    const { broadcast } = getServerStore();
+    const updates: Partial<typeof broadcast> = {};
+
+    if (liveInfo.isLive) {
+      if (!broadcast.isLive) updates.isLive = true;
+      if (liveInfo.streamTitle && liveInfo.streamTitle !== broadcast.streamTitle) {
+        updates.streamTitle = liveInfo.streamTitle;
+      }
+      if (liveInfo.youtubeVideoId && liveInfo.youtubeVideoId !== broadcast.youtubeVideoId) {
+        updates.youtubeVideoId = liveInfo.youtubeVideoId;
+      }
+      if (liveInfo.ingestionUrl && liveInfo.ingestionUrl !== broadcast.ingestionUrl) {
+        updates.ingestionUrl = liveInfo.ingestionUrl;
+      }
+      if (liveInfo.viewerCount && liveInfo.viewerCount !== broadcast.viewerCount) {
+        updates.viewerCount = liveInfo.viewerCount;
+      }
+    } else if (!liveInfo.isLive && broadcast.isLive) {
+      updates.isLive = false;
+      updates.viewerCount = 0;
+    }
+
+    if (Object.keys(updates).length > 0) {
+      updateBroadcast(updates);
+      const db = await getDb();
+      if (db) {
+        try {
+          await updateBroadcastDb(updates);
+        } catch (e) {
+          console.warn("[Broadcast API] background DB update failed:", e);
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("[Broadcast API] background live sync failed:", err);
+  }
+}
+
 export async function GET() {
+  // Fire on-demand background YouTube check (non-blocking)
+  syncYouTubeInBackground().catch(() => {});
+
   // Try database first, fallback to in-memory store
   const db = await getDb();
   if (db) {
