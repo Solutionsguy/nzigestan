@@ -22,10 +22,10 @@ const ADMIN_SECRET = process.env.NEXT_PUBLIC_ADMIN_AUTH_SECRET || "32f0a395fa829
 
 export function BroadcastProvider({ children }: { children: React.ReactNode }) {
   const [isLive, setIsLiveState] = useState<boolean>(false);
-  const [streamTitle, setStreamTitleState] = useState<string>("AMAN on a Mission - Kitengela Only // Live Broadcast");
-  const [viewerCount, setViewerCount] = useState<number>(14280);
+  const [streamTitle, setStreamTitleState] = useState<string>("");
+  const [viewerCount, setViewerCount] = useState<number>(0);
   const [nextStreamDate, setNextStreamDateState] = useState<string>("Friday 9:00 PM EAT");
-  const [ingestionUrl, setIngestionUrlState] = useState<string>("https://www.youtube.com/watch?v=7tkGUXetubY");
+  const [ingestionUrl, setIngestionUrlState] = useState<string>("");
 
   // Fetch broadcast status from central server API (shared across all LAN devices)
   const syncWithServer = useCallback(async () => {

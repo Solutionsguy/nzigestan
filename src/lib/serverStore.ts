@@ -117,8 +117,8 @@ function loadStore(): ServerStore | null {
 const store: ServerStore = loadStore() ?? {
   broadcast: {
     isLive: false,
-    streamTitle: "AMAN on a Mission - Kitengela Only // Live Broadcast",
-    viewerCount: 14280,
+    streamTitle: "Nzigestan Live Stream Standby",
+    viewerCount: 0,
     nextStreamDate: "Friday 9:00 PM EAT",
     ingestionUrl: "https://www.youtube.com/watch?v=7tkGUXetubY",
     youtubeVideoId: "7tkGUXetubY",

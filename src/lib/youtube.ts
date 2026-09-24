@@ -440,8 +440,7 @@ export async function getYouTubeLiveInfo(currentKnownVideoId?: string): Promise<
           if (isStillLive) {
             const streamTitle = decodeXmlEntities(item.snippet?.title || "Live Studio Broadcast");
             const concurrentViewers = item.liveStreamingDetails?.concurrentViewers;
-            const statsViews = item.statistics?.viewCount;
-            const viewerCount = parseInt(concurrentViewers || statsViews || "0", 10);
+            const viewerCount = concurrentViewers ? parseInt(concurrentViewers, 10) : 0;
 
             return {
               isLive: true,
@@ -486,8 +485,7 @@ export async function getYouTubeLiveInfo(currentKnownVideoId?: string): Promise<
       const details = await detailsRes.json();
       const item = details.items && details.items[0];
       const concurrentViewers = item?.liveStreamingDetails?.concurrentViewers;
-      const statsViews = item?.statistics?.viewCount;
-      viewerCount = parseInt(concurrentViewers || statsViews || "0", 10);
+      viewerCount = concurrentViewers ? parseInt(concurrentViewers, 10) : 0;
     }
 
     return {

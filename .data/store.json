@@ -1,12 +1,12 @@
 {
   "broadcast": {
-    "isLive": true,
+    "isLive": false,
     "streamTitle": "Full House Mini",
-    "viewerCount": 362,
+    "viewerCount": 0,
     "nextStreamDate": "Friday 9:00 PM EAT",
     "ingestionUrl": "https://www.youtube.com/watch?v=0GmQ0OOIED4",
     "youtubeVideoId": "0GmQ0OOIED4",
-    "updatedAt": "2026-09-24T15:08:21.313Z"
+    "updatedAt": "2026-09-24T15:27:35.392Z"
   },
   "episodes": [
     {
